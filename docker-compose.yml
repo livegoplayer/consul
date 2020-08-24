@@ -1,0 +1,73 @@
+version: '2'
+
+services:
+  consul1:
+    image: consul:latest
+    container_name: consul1
+    ports:
+       - "8500:8500"
+       - "8300:8300"
+       - "8301:8301"
+       - "8302:8302"
+       - "8600:8600"
+    volumes:
+       #配置文件目录, 所有的配置都在配置文件里面
+       - ./conf/server_leader:/opt/consul/conf
+       #配置持久化数据存放目录
+       - ./data/consul1:/opt/consul/data
+    command: agent -ui -config-dir=/opt/consul/conf -node=consul1 -disable-host-node-id
+
+  consul2:
+    image: consul:latest
+    container_name: consul2
+    depends_on:
+      - consul1
+    # ports:
+       # - "8500:8500"
+       #- "8300:8300"
+       #- "8301:8301"
+       #- "8302:8302"
+       #- "8600:8600"
+    volumes:
+       #配置文件目录, 所有的配置都在配置文件里面
+       - ./conf/server:/opt/consul/conf
+       #配置持久化数据存放目录
+       - ./data/consul2:/opt/consul/data
+    command: agent -config-dir=/opt/consul/conf -node=consul2 -disable-host-node-id -retry-join=consul1
+
+  consul3:
+    image: consul:latest
+    container_name: consul3
+    depends_on:
+      - consul1
+    # ports:
+       # - "8502:8500"
+       #- "8300:8300"
+       #- "8301:8301"
+       #- "8302:8302"
+       #- "8600:8600"
+    volumes:
+       #配置文件目录, 所有的配置都在配置文件里面
+       - ./conf/server:/opt/consul/conf
+       #配置持久化数据存放目录
+       - ./data/consul3:/opt/consul/data
+    command: agent -config-dir=/opt/consul/conf -node=consul3 -disable-host-node-id -retry-join=consul1
+
+  consul_client1:
+    image: consul:latest
+    container_name: consul_client1
+    depends_on:
+      - consul2
+      - consul3
+    #ports:
+       #- "8500:8500"
+       #- "8300:8300"
+       #- "8301:8301"
+       #- "8302:8302"
+       #- "8600:8600"
+    volumes:
+       #配置文件目录, 所有的配置都在配置文件里面
+       - ./conf/client:/opt/consul/conf
+       #配置持久化数据存放目录client 不需要做磁盘持久化
+       #- ./data/consul_client1:/opt/consul/data
+    command: agent -config-dir=/opt/consul/conf -node=consul4 -disable-host-node-id -retry-join=consul1

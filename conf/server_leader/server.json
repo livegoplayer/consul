@@ -1,0 +1,26 @@
+{
+	"bootstrap_expect": 3,
+	"acl_default_policy":"allow",
+	"acl_token":"xxtl",
+	"acl_ttl":"30s",
+	"client_addr":"0.0.0.0",
+	"bind_addr":"0.0.0.0",
+	"bootstrap":false,
+	"data_dir":"/opt/consul/data",
+	"enable_debug":true,
+	"enable_syslog":false,
+	"disable_update_check":true,
+	"log_level":"info",
+	"ports":{
+		"dns": 8600,
+		"https": -1,
+		"http": 8500,
+		"serf_lan": 8301,
+		"serf_wan": 8302,
+		"server": 8300
+	},
+	"rejoin_after_leave": true,
+	"retry_interval":"30s",
+	"server":true,
+	"syslog_facility": "local0"
+}
