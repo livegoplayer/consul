@@ -13,12 +13,12 @@
 	"disable_update_check":true,
 	"log_level":"info",
 	"ports":{
-		"dns": 8600,
+		"dns": 8601,
 		"https": -1,
-		"http": 8500,
-		"serf_lan": 8301,
-		"serf_wan": 8302,
-		"server": 8300
+		"http": 8501,
+		"serf_lan": 8401,
+		"serf_wan": 8402,
+		"server": 8400
 	},
 	"rejoin_after_leave": true,
 	"retry_interval":"30s",
