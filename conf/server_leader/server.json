@@ -1,5 +1,5 @@
 {
-	"bootstrap_expect": 3,
+	"bootstrap_expect": 2,
 	"acl_default_policy":"allow",
 	"acl_token":"xxtl",
 	"acl_ttl":"30s",
