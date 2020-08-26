@@ -22,7 +22,7 @@ services:
     container_name: consul2
     depends_on:
       - consul1
-    # ports:
+    ports:
        - "8501:8501"
        - "8400:8400"
        - "8401:8401"
