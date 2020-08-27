@@ -12,7 +12,7 @@ services:
        - "8600:8600"
     volumes:
        #配置文件目录, 所有的配置都在配置文件里面
-       - ./conf/server_leader:/opt/consul/conf
+       - ./conf/consul1:/opt/consul/conf
        #配置持久化数据存放目录
        - ./data/consul1:/opt/consul/data
     command: agent -ui -config-dir=/opt/consul/conf -node=consul1 -disable-host-node-id
@@ -30,7 +30,7 @@ services:
        - "8601:8601"
     volumes:
        #配置文件目录, 所有的配置都在配置文件里面
-       - ./conf/server:/opt/consul/conf
+       - ./conf/consul2:/opt/consul/conf
        #配置持久化数据存放目录
        - ./data/consul2:/opt/consul/data
     command: agent -config-dir=/opt/consul/conf -node=consul2 -disable-host-node-id -retry-join=consul1
